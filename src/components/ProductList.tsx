@@ -1,14 +1,15 @@
 import ProductItem from "./ProductItem";
-import { Product } from "../types/Product";
+import { CartItem, Product } from "../types/Product";
 import { useQuery } from "@tanstack/react-query";
 import { Box, Grid, Typography } from "@mui/material";
 import config from "../app/config";
 
 interface ProductListProps {
+  cartItems: CartItem[];
   onAddToCart: (product: Product) => void;
 }
 
-const ProductList: React.FC<ProductListProps> = ({ onAddToCart }) => {
+function ProductList({ cartItems, onAddToCart }: ProductListProps) {
   const fetchProducts = async () => {
     const response = await fetch(config.apiURL + "/product");
 
@@ -31,16 +32,7 @@ const ProductList: React.FC<ProductListProps> = ({ onAddToCart }) => {
   }
 
   return (
-    // <div className="product-list">
-    //   <h2>Desserts</h2>
-    //   <div className="products-grid">
-    //     {products?.map((item) => (
-    //       <ProductItem key={item.id} product={item} onAddToCart={onAddToCart} />
-    //     ))}
-    //   </div>
-    // </div>
-
-    <Box sx={{width: "80%", mr: 2}}>
+    <Box sx={{ width: "80%", mr: 2 }}>
       <Typography variant="h4" gutterBottom color="#3F2D28">
         Desserts
       </Typography>
@@ -48,6 +40,7 @@ const ProductList: React.FC<ProductListProps> = ({ onAddToCart }) => {
         {products?.map((item) => (
           <ProductItem
             key={item.id}
+            cartItems={cartItems}
             product={item}
             onAddToCart={onAddToCart}
           ></ProductItem>
@@ -55,6 +48,6 @@ const ProductList: React.FC<ProductListProps> = ({ onAddToCart }) => {
       </Grid>
     </Box>
   );
-};
+}
 
 export default ProductList;

@@ -1,5 +1,3 @@
-// import "./App.css";
-
 import ShoppingCart from "./components/ShoppingCart";
 import ProductList from "./components/ProductList";
 import { useState } from "react";
@@ -76,7 +74,6 @@ function App() {
       });
 
       if (response.ok) {
-        // const data = await response.json();
         setOpenConfirmDiaglog(true);
       } else {
         alert("Failed to place order.");
@@ -100,12 +97,14 @@ function App() {
       sx={{
         maxWidth: "1440px",
         display: "flex",
-        p: 4,
         direction: "row",
         backgroundColor: "#00000000",
+        pt: 10,
+        pl: 20,
+        pb: 10,
       }}
     >
-      <ProductList onAddToCart={handleAddToCart} />
+      <ProductList cartItems={cartItems} onAddToCart={handleAddToCart} />
       <ShoppingCart
         cartItems={cartItems}
         onDecreaseQuantity={handleDecreaseQuantity}

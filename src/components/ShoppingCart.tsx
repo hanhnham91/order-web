@@ -1,4 +1,3 @@
-import React from "react";
 import { CartItem } from "../types/Product";
 import {
   Box,
@@ -11,19 +10,19 @@ import {
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 
-interface CartProps {
+interface ShoppingCartProps {
   cartItems: CartItem[];
   onIncreaseQuantity: (id: number) => void;
   onDecreaseQuantity: (id: number) => void;
   onConfirmOrder: () => void;
 }
 
-const ShoppingCart: React.FC<CartProps> = ({
+function ShoppingCart({
   cartItems,
   onDecreaseQuantity,
   onIncreaseQuantity,
   onConfirmOrder,
-}) => {
+}: ShoppingCartProps) {
   function calculateOrderTotal(): number {
     return cartItems?.reduce(
       (total, item) => total + item.price * item.quantity,
@@ -118,6 +117,6 @@ const ShoppingCart: React.FC<CartProps> = ({
       </Card>
     </Box>
   );
-};
+}
 
 export default ShoppingCart;
